@@ -81,7 +81,8 @@ function buildCharts(sample) {
     console.log(otuIds);
     console.log(otuLabels);
     console.log(sampleValues);
-    var wfreq = parseFloat(metadata.freq);
+    var wfreq = parseFloat(metadata.wfreq);
+    console.log(metadata.wfreq)
 
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
@@ -136,27 +137,28 @@ function buildCharts(sample) {
 
       // 3. Use Plotly to plot the data with the layout.
       Plotly.newPlot("bubble", bubbleData, bubbleLayout, {responsive: true});
-
+      console.log(wfreq)
       // 4. Create the trace for the gauge chart.
       var gaugeData = [
         {
-          domain:{ x: [0, 1], y: [0, 1] },
+          domain: { x: [0, 1], y: [0, 1] },
           value: wfreq,
           title: { text: "Washing Frequency (Scrubs Per Week)" },
           type: "indicator",
-          mode: "guage+number",
-          guage: {
-            axis: { range: [null, 10]},
-            bar: {color: 'white'},
-          steps: [
-            {range: [0, 2], color: "red"},
-            {range: [2, 4], color: "orange"},
-            {range: [4, 6], color: "yellow"},
-            {range: [6, 8], color: "lightgreen"},
-            {range: [8, 10], color: "green"}
-          ]
+          mode: "gauge+number",
+          gauge: {
+            axis: { range: [null, 10] },
+            steps: [
+              {range: [0, 2], color: "red"},
+                {range: [2, 4], color: "orange"},
+                {range: [4, 6], color: "yellow"},
+                {range: [6, 8], color: "lightgreen"},
+                {range: [8, 10], color: "green"}
+          ],
+
         }
-      }];
+      }
+    ];
       
       // 5. Create the layout for the gauge chart.
       var gaugeLayout = { 
