@@ -109,20 +109,18 @@ function buildCharts(sample) {
     };
     // 10. Use Plotly to plot the data with the layout. 
     Plotly.newPlot("bar", barData, barLayout, {responsive: true});
-  });
-}
-
-// Deliverable 2
-// Bar and Bubble charts
+  
+    // Deliverable 2
+    // Bar and Bubble charts
     //  1. Create the trace for the bubble chart.
     var bubbleData = [{
-      x: otu_ids,
-      y: sample_values,
-      text: otu_labels,
+      x: otuIds,
+      y: sampleValues,
+      text: otuLabels,
       mode: 'markers',
       marker: {
-        size: sample_values,
-        color: otu_ids,
+        size: sampleValues,
+        color: otuIds,
         colorscale: "Earth"
       }
     }];
@@ -136,5 +134,39 @@ function buildCharts(sample) {
       hovermode: "closest"
     };
 
-    // 3. Use Plotly to plot the data with the layout.
-    Plotly.newPlot("bubble", bubbleData, bubbleLayout, {responsive: true}); 
+      // 3. Use Plotly to plot the data with the layout.
+      Plotly.newPlot("bubble", bubbleData, bubbleLayout, {responsive: true});
+
+      // 4. Create the trace for the gauge chart.
+      var gaugeData = [
+        {
+          domain:{ x: [0, 1], y: [0, 1] },
+          value: wfreq,
+          title: { text: "Washing Frequency (Scrubs Per Week)" },
+          type: "indicator",
+          mode: "guage+number",
+          guage: {
+            axis: { range: [null, 10]},
+            bar: {color: 'white'},
+          steps: [
+            {range: [0, 2], color: "red"},
+            {range: [2, 4], color: "orange"},
+            {range: [4, 6], color: "yellow"},
+            {range: [6, 8], color: "lightgreen"},
+            {range: [8, 10], color: "green"}
+          ]
+        }
+      }];
+      
+      // 5. Create the layout for the gauge chart.
+      var gaugeLayout = { 
+       width: 500,
+       height: 400,
+       margin: {t: 25, r: 25, l: 25, b: 25},
+       
+      };
+  
+      // 6. Use Plotly to plot the gauge data and layout.
+      Plotly.newPlot("gauge", gaugeData, gaugeLayout, {responsive: true});
+    });
+  }
