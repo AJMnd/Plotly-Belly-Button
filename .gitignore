@@ -1,6 +1,7 @@
 # Compiled class file
 *.class
-
+# Add practice
+practice
 # Log file
 *.log
 
